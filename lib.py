@@ -79,6 +79,6 @@ class EmployeeManagement:
 emp_man = EmployeeManagement("emp.json")
 emp_man.add_employee("Chatresh", "M", 100000, "Developer", "12-12-2023", 16, 2, "Research")
 emp_man.add_employee("Avinash", "M", 1000000, "CEO", "12-12-2023", 18, 2, "Management")
-emp_man.remove_employee("E1")
-emp_man.update_employee("E2", salary = 1000000000000)
+emp_man.remove_employee("E2")
+emp_man.update_employee("E1", salary = 1000000000000)
 print(emp_man.get_all_employees())
