@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Employee Management System</string>
   </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="1" column="3">
@@ -172,7 +175,14 @@
       </widget>
       <widget class="QWidget" name="Admin_Main_Page">
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="2">
+        <item row="0" column="0" colspan="3">
+         <widget class="QLineEdit" name="search_txt">
+          <property name="placeholderText">
+           <string>Search for an emplyee by his name.</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
          <widget class="QPushButton" name="search_btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -254,21 +264,51 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="0" colspan="2">
-         <widget class="QLineEdit" name="search_txt">
-          <property name="placeholderText">
-           <string>Search for an emplyee by his name.</string>
+        <item row="1" column="1" colspan="3">
+         <widget class="QTableWidget" name="Emp_View">
+          <property name="columnCount">
+           <number>8</number>
           </property>
-         </widget>
-        </item>
-        <item row="1" column="1" colspan="2">
-         <widget class="QFrame" name="Main">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Gender</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Salary</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date of Joining</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Designation</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Age</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Experience</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Department</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>

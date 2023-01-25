@@ -22,6 +22,7 @@ class EmployeeManagement:
             self.__employee_data = json.loads(self.__file_read.read().strip())
         else:
             self.__employee_data = {}
+        print(self.__employee_data)
 
     def add_employee(self, name:str, gender:str, salary:int, designation:str, date_of_joining:datetime, age:int, exp:int, dept:str):
         employee_id = self.__generate_employee_id()
@@ -78,6 +79,7 @@ class EmployeeManagement:
                 if i != "Login details":
                     if self.__employee_data[i]["salary"] in range(salaryl[0], salaryl[1]+1):
                         ids.append(i)
+                        continue
         
         if designation: # Searching Based on designation.
             for i in self.__employee_data:
@@ -91,7 +93,9 @@ class EmployeeManagement:
             
     def get_all_employees(self):
         '''Returns the employee data.'''
-        return self.__employee_data
+        data = self.__employee_data
+        del data["Login details"]
+        return data
 
     def __generate_employee_id(self):
         '''Generate a unique employee id'''
@@ -122,6 +126,7 @@ class EmployeeManagement:
         return sal_list
 
 # emp_man = EmployeeManagement("emp.json")
+# emp_man.verify_login("Admin", "ad", "pass")
 # emp_man.add_employee("Chatresh", "M", 100000, "Developer", "12-12-2023", 16, 2, "Research")
 # emp_man.add_employee("Avinash", "M", 1000000, "CEO", "12-12-2023", 18, 2, "Management")
 # emp_man.remove_employee("E2")

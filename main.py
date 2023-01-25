@@ -68,6 +68,18 @@ class Window(QMainWindow):
         self.l_limit.setMaximum(max(self.emp_man.find_sal_list()))
         self.u_limit.setMaximum(max(self.emp_man.find_sal_list()))
 
+        self.Setup_Emp_View(self.emp_man.get_all_employees())
+
+    def Setup_Emp_View(self, data):
+        self.Emp_View.setRowCount(len(data))
+        row = 0
+        col = 0
+        for i in data:
+            for j in data[i]:
+                self.Emp_View.setItem(row, col, data[i][j])
+                col+=1
+            row+=1
+
 app = QApplication([])
 win = Window()
 win.show()
