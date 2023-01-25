@@ -69,19 +69,19 @@ class EmployeeManagement:
             ids.append(employee_id)
         if name: # Searching Based on Name
             for i in self.__employee_data:
-                if i != "Login Details":
+                if i != "Login details":
                     if name in self.__employee_data[i]["name"]:
                         ids.append(i)
         
         if salaryl: # Searching Based on Salary
             for i in self.__employee_data:
-                if i != "Login Details":
+                if i != "Login details":
                     if self.__employee_data[i]["salary"] in range(salaryl[0], salaryl[1]+1):
                         ids.append(i)
         
         if designation: # Searching Based on designation.
             for i in self.__employee_data:
-                if i != "Login Details":
+                if i != "Login details":
                     if self.__employee_data[i]["designation"] == designation:
                         ids.append(i)
         data = []
@@ -108,11 +108,18 @@ class EmployeeManagement:
         return False
 
     def gen_designations(self):
-        designations = {}
+        designations = set()
         for i in self.__employee_data:
-            if i != "Login Details":
+            if i != "Login details":
                 designations.add(self.__employee_data[i]["designation"])
         return designations
+
+    def find_sal_list(self):
+        sal_list = []
+        for i in self.__employee_data:
+            if i!= "Login details":
+                sal_list.append(self.__employee_data[i]["salary"])
+        return sal_list
 
 # emp_man = EmployeeManagement("emp.json")
 # emp_man.add_employee("Chatresh", "M", 100000, "Developer", "12-12-2023", 16, 2, "Research")

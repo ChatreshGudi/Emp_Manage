@@ -170,7 +170,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Main_Page">
+      <widget class="QWidget" name="Admin_Main_Page">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="2">
          <widget class="QPushButton" name="search_btn">
@@ -205,7 +205,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
            <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="l_lbl">
              <property name="text">
               <string>Lower Limit</string>
              </property>
@@ -222,14 +222,14 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="u_limit">
+            <widget class="QLabel" name="u_lbl">
              <property name="text">
               <string>Upper Limit</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_2"/>
+            <widget class="QSpinBox" name="u_limit"/>
            </item>
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="salary_lbl">
@@ -245,7 +245,11 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QComboBox" name="des_data"/>
+            <widget class="QComboBox" name="des_data">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -269,6 +273,7 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="Employee_EMP_Page"/>
      </widget>
     </item>
    </layout>

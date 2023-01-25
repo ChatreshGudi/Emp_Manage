@@ -50,9 +50,24 @@ class Window(QMainWindow):
         if type:
             if self.emp_man.verify_login(type, name, passw):
                 if type == "Admin":
-                    self.stackedWidget.setCurrentWidget(self.Main_Page)
+                    self.stackedWidget.setCurrentWidget(self.Admin_Main_Page)
+                    self.setup_Admin_Main_Page()
                 elif type == "Employee":
                     pass
+    
+    def setup_Admin_Main_Page(self):
+        # Setting up the Designation Combo Box.
+        for i in self.emp_man.gen_designations():
+            if i != "Login details":
+                self.des_data.addItem(i)
+
+        # Setting up the SpinBoxes
+        self.l_limit.setMinimum(min(self.emp_man.find_sal_list()))
+        self.u_limit.setMinimum(min(self.emp_man.find_sal_list()))
+        
+        self.l_limit.setMaximum(max(self.emp_man.find_sal_list()))
+        self.u_limit.setMaximum(max(self.emp_man.find_sal_list()))
+
 app = QApplication([])
 win = Window()
 win.show()
