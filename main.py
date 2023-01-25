@@ -1,7 +1,7 @@
 # import PyQt6
 from PyQt6.uic import loadUi
 from PyQt6 import *
-from PyQt6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget, QFileDialog, QLineEdit
+from PyQt6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget, QFileDialog, QLineEdit, QTableWidgetItem
 import sys
 import os
 from emplib import *
@@ -20,6 +20,9 @@ class Window(QMainWindow):
         ## Login Page
         self.rand_pass_btn.clicked.connect(self.rand_pass) # Generating a random password.
         self.login_btn.clicked.connect(self.login) # Login
+
+        ## Admin Main Page
+        self.save_btn.clicked.connect(self.savedata) # Used to save data updated by the admin.
 
     # Home Page
 
@@ -74,11 +77,21 @@ class Window(QMainWindow):
         self.Emp_View.setRowCount(len(data))
         row = 0
         col = 0
+        print(data)
         for i in data:
+            col = 0
             for j in data[i]:
-                self.Emp_View.setItem(row, col, data[i][j])
+                print("Cords: ", row, col, "Data: ", i, j)
+                self.Emp_View.setItem(row, col, QTableWidgetItem(str(data[i][j])))
                 col+=1
             row+=1
+
+    def savedata(self):
+        col_name = ["name", "gender", "salary", "date_of_joining", "designation", "age", "experience", "department"]
+        row_data = {}
+        for i in range(self.Emp_View.rowCount()):
+            for j in range(8):
+                pass
 
 app = QApplication([])
 win = Window()
