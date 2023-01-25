@@ -262,9 +262,9 @@
             </widget>
            </item>
            <item row="4" column="0" colspan="2">
-            <widget class="QPushButton" name="save_btn">
+            <widget class="QPushButton" name="open_btn">
              <property name="text">
-              <string>Save</string>
+              <string>Open</string>
              </property>
             </widget>
            </item>
@@ -321,6 +321,81 @@
        </layout>
       </widget>
       <widget class="QWidget" name="Employee_EMP_Page"/>
+      <widget class="QWidget" name="Admin_EMP_Page">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="2" column="3">
+         <widget class="QLineEdit" name="emp_salary_value_ad"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Gender:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="name_lbl_2">
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLineEdit" name="emp_desig_text_ad"/>
+        </item>
+        <item row="3" column="3">
+         <widget class="QComboBox" name="emp_gender_value_ad">
+          <item>
+           <property name="text">
+            <string>M</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>F</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Salary: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="emp_name_text_ad"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Designation: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="5">
+         <widget class="QSpinBox" name="emp_age_value_ad"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Department: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Age: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QComboBox" name="emp_dept_value_ad"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

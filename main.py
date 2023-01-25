@@ -22,7 +22,7 @@ class Window(QMainWindow):
         self.login_btn.clicked.connect(self.login) # Login
 
         ## Admin Main Page
-        self.save_btn.clicked.connect(self.savedata) # Used to save data updated by the admin.
+        self.open_btn.clicked.connect(self.openempdata) # Used to save data updated by the admin.
 
     # Home Page
 
@@ -86,12 +86,8 @@ class Window(QMainWindow):
                 col+=1
             row+=1
 
-    def savedata(self):
-        col_name = ["name", "gender", "salary", "date_of_joining", "designation", "age", "experience", "department"]
-        row_data = {}
-        for i in range(self.Emp_View.rowCount()):
-            for j in range(8):
-                pass
+    def openempdata(self):
+        pass
 
 app = QApplication([])
 win = Window()
