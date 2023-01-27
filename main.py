@@ -22,7 +22,7 @@ class Window(QMainWindow):
         self.login_btn.clicked.connect(self.login) # Login
 
         ## Admin Main Page
-        self.open_btn.clicked.connect(self.openempdata) # Used to save data updated by the admin.
+        self.open_btn.clicked.connect(self.openempdata) # Used to Open Employee data
 
     # Home Page
 
@@ -87,7 +87,7 @@ class Window(QMainWindow):
             row+=1
 
     def openempdata(self):
-        pass
+        cur_row = self.Emp_View.currentRow()
 
 app = QApplication([])
 win = Window()
