@@ -93,8 +93,12 @@ class EmployeeManagement:
             
     def get_all_employees(self):
         '''Returns the employee data.'''
+        # print(self.__employee_data)
         data = self.__employee_data
-        del data["Login details"]
+        try:
+            del data["Login details"]
+        except:
+            pass
         return data
 
     def __generate_employee_id(self):

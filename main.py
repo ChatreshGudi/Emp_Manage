@@ -2,6 +2,7 @@
 from PyQt6.uic import loadUi
 from PyQt6 import *
 from PyQt6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget, QFileDialog, QLineEdit, QTableWidgetItem
+from PyQt6.QtCore import QDate
 import sys
 import os
 from emplib import *
@@ -77,17 +78,26 @@ class Window(QMainWindow):
         self.Emp_View.setRowCount(len(data))
         row = 0
         col = 0
-        print(data)
         for i in data:
             col = 0
             for j in data[i]:
-                print("Cords: ", row, col, "Data: ", i, j)
                 self.Emp_View.setItem(row, col, QTableWidgetItem(str(data[i][j])))
                 col+=1
             row+=1
 
     def openempdata(self):
-        cur_row = self.Emp_View.currentRow()
+        self.__cur_emp_ID = "E"+str(self.Emp_View.currentRow())
+        self.stackedWidget.setCurrentWidget(self.Admin_EMP_Page)
+        emp_data = self.emp_man.get_all_employees()[self.__cur_emp_ID]
+        self.emp_name_value_ad.setText(emp_data["name"])
+        self.emp_desig_value_ad.setText(emp_data["designation"])
+        self.emp_salary_value_ad.setValue(emp_data["salary"])
+        self.emp_gender_value_ad.setCurrentText(emp_data["gender"])
+        self.emp_age_value_ad.setValue(emp_data["age"])
+        self.emp_dept_value_ad.setCurrentText(emp_data["dept"])
+        self.emp_exp_value_ad.setValue(emp_data["experience"])
+        date = [int(i) for i in emp_data["date_of_joining"].split('-')]
+        self.emp_doj_value_ad.setDate(QDate(date[-1], date[1], date[0]))
 
 app = QApplication([])
 win = Window()
