@@ -42,6 +42,10 @@ class EmployeeManagement:
     def remove_employee(self, employee_id):
         if employee_id in self.__employee_data:
             del self.__employee_data[employee_id]
+            num = int(employee_id[1:])
+            for i in range(num, len(self.__employee_data)-1):
+                self.__employee_data["E"+str(i)] = self.__employee_data["E"+str(i+1)]
+            del self.__employee_data["E"+str(i+1)]
             self.update_file()
             return True
         else:
@@ -65,40 +69,53 @@ class EmployeeManagement:
             return False
 
     def search(self, employee_id:str = None, name:str = None, salaryl:tuple = None, designation:str = None):
-        ids = []
+        ids = set()
         if employee_id:
-            ids.append(employee_id)
+            ids.add(employee_id)
         if name: # Searching Based on Name
             for i in self.__employee_data:
                 if i != "Login details":
                     if name in self.__employee_data[i]["name"]:
-                        ids.append(i)
+                        ids.add(i)
         
         if salaryl: # Searching Based on Salary
-            for i in self.__employee_data:
-                if i != "Login details":
-                    if self.__employee_data[i]["salary"] in range(salaryl[0], salaryl[1]+1):
-                        ids.append(i)
-                        continue
-        
+            if len(ids) == 0:
+                for i in self.__employee_data:
+                    if i != "Login details":
+                        if self.__employee_data[i]["salary"] in range(salaryl[0], salaryl[1]+1):
+                            ids.add(i)
+            else:
+                samp_sal_ids = ids.copy()
+                for i in ids:
+                    if self.__employee_data[i]["salary"] not in range(salaryl[0], salaryl[1]+1):
+                            samp_sal_ids.remove(i)
+                ids = samp_sal_ids
+                del samp_sal_ids
+            
         if designation: # Searching Based on designation.
-            for i in self.__employee_data:
-                if i != "Login details":
-                    if self.__employee_data[i]["designation"] == designation:
-                        ids.append(i)
-        data = []
+            if len(ids) == 0:
+                for i in self.__employee_data:
+                    if i != "Login details":
+                        if self.__employee_data[i]["designation"] == designation:
+                            ids.add(i)
+            else:
+                samp_desig_ids = ids.copy()
+                for i in ids:
+                    if self.__employee_data[i]["designation"] != designation:
+                        samp_desig_ids.remove(i)
+                ids = samp_desig_ids
+                del samp_desig_ids
+        
+        data = {}
         for i in ids:
-            data.append(self.__employee_data[i])
+            data[i] = self.__employee_data[i]
         return data
             
     def get_all_employees(self):
         '''Returns the employee data.'''
         # print(self.__employee_data)
-        data = self.__employee_data
-        try:
-            del data["Login details"]
-        except:
-            pass
+        data = self.__employee_data.copy()
+        del data["Login details"]
         return data
 
     def __generate_employee_id(self):

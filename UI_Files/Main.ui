@@ -101,6 +101,9 @@
           <property name="text">
            <string>Admin</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="5" column="3" colspan="2">
@@ -236,6 +239,11 @@
              <property name="editable">
               <bool>true</bool>
              </property>
+             <item>
+              <property name="text">
+               <string>All</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="3" column="0">
@@ -288,8 +296,13 @@
         <item row="1" column="1" colspan="3">
          <widget class="QTableWidget" name="Emp_View">
           <property name="columnCount">
-           <number>8</number>
+           <number>9</number>
           </property>
+          <column>
+           <property name="text">
+            <string>EID</string>
+           </property>
+          </column>
           <column>
            <property name="text">
             <string>Name</string>
@@ -337,38 +350,7 @@
       <widget class="QWidget" name="Employee_EMP_Page"/>
       <widget class="QWidget" name="Admin_EMP_Page">
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="2" column="3">
-         <widget class="QSpinBox" name="emp_salary_value_ad"/>
-        </item>
-        <item row="2" column="4">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Date of Joining: </string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Gender:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="name_lbl_2">
-          <property name="text">
-           <string>Name:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Designation: </string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
+        <item row="4" column="3">
          <widget class="QComboBox" name="emp_gender_value_ad">
           <item>
            <property name="text">
@@ -383,50 +365,131 @@
          </widget>
         </item>
         <item row="2" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Designation: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="name_lbl_2">
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
            <string>Salary: </string>
           </property>
          </widget>
         </item>
-        <item row="3" column="4">
+        <item row="4" column="4">
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string>Age: </string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
            <string>Department: </string>
           </property>
          </widget>
         </item>
-        <item row="4" column="3">
-         <widget class="QComboBox" name="emp_dept_value_ad"/>
+        <item row="5" column="3">
+         <widget class="QComboBox" name="emp_dept_value_ad">
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
-        <item row="3" column="5">
-         <widget class="QSpinBox" name="emp_age_value_ad"/>
+        <item row="3" column="4">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Date of Joining: </string>
+          </property>
+         </widget>
         </item>
-        <item row="2" column="5">
-         <widget class="QDateEdit" name="emp_doj_value_ad"/>
+        <item row="3" column="3">
+         <widget class="QSpinBox" name="emp_salary_value_ad"/>
         </item>
-        <item row="4" column="4">
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Gender:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QPushButton" name="update_ad_btn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Icons/update.png</normaloff>../Icons/update.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="4">
          <widget class="QLabel" name="label_6">
           <property name="text">
            <string>Experience: </string>
           </property>
          </widget>
         </item>
-        <item row="1" column="3" colspan="3">
+        <item row="4" column="5">
+         <widget class="QSpinBox" name="emp_age_value_ad"/>
+        </item>
+        <item row="3" column="5">
+         <widget class="QDateEdit" name="emp_doj_value_ad"/>
+        </item>
+        <item row="2" column="3" colspan="3">
          <widget class="QLineEdit" name="emp_desig_value_ad"/>
         </item>
-        <item row="4" column="5">
+        <item row="5" column="5">
          <widget class="QSpinBox" name="emp_exp_value_ad"/>
         </item>
-        <item row="0" column="3" colspan="3">
+        <item row="1" column="3" colspan="3">
          <widget class="QLineEdit" name="emp_name_value_ad"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="back_ad_btn">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Icons/Back.png</normaloff>../Icons/Back.png</iconset>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
