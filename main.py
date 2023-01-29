@@ -211,6 +211,20 @@ class Window(QMainWindow):
         self.setup_Admin_Main_Page()
 
 app = QApplication([])
+
+# Setting a stylesheet
+with open("style.qss") as f:
+    bgcolor = "qlineargradient( x1:0 y1:0, x2:1 y2:1, stop:0 rgb(0, 148, 255), stop:1 rgb(0, 119, 255))"
+    lblue = "rgb(0, 148, 255)"
+    dblue = "rgb(0, 119, 255)"
+    theme = "rgb(18, 18, 18)"
+    style = f.read()
+    style = style.replace("bgcolor", bgcolor, style.count("bgcolor"))
+    style = style.replace("lblue", lblue, style.count("lblue"))
+    style = style.replace("dblue", dblue, style.count("dblue"))
+    style = style.replace("theme", theme, style.count("theme"))
+    app.setStyleSheet(style)
+
 win = Window()
 win.show()
 app.exec()

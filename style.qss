@@ -1,0 +1,121 @@
+QWidget{
+    background: theme;
+}
+
+QPushButton{
+    background: bgcolor;
+    color: theme;
+    padding: 10px;
+    border: 1px solid lblue;
+    border-radius: 15px;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+QPushButton:hover{
+    background: lblue;
+}
+
+QLineEdit{
+    border: 1px solid lblue;
+    border-radius: 15px;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    color: lblue;
+}
+
+QLabel{
+    color: lblue;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+QSpinBox{
+    padding: 10px;
+    border-radius: 15px;
+    background: bgcolor;
+    color:theme;
+    border: 1px solid lblue;
+}
+
+QComboBox{
+    padding: 10px;
+    border-radius: 5px;
+    background: theme;
+    border: 1px solid lblue;
+    color: lblue;
+}
+
+QComboBox::drop-down{
+    background:theme;
+    color: white;
+}
+
+QComboBox QAbstractItemView{
+	background-color: theme;
+	color: lblue;
+ 
+	selection-background-color: lblue;
+	selection-color: theme;
+
+    font-size: 15px;
+}
+
+QRadioButton{
+    color: lblue;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+QDateEdit{
+    padding: 10px;
+    border-radius: 15px;
+    background: bgcolor;
+    color:theme;
+    border: 1px solid lblue;
+}
+
+QScrollBar:horizontal{
+    background: theme;
+    border: 1px solid lblue;
+    height: 10px;
+}
+QScrollBar::handle:horizontal{
+    background: bgcolor;
+    height: 10px;
+}
+
+QScrollBar::add-line:horizontal {
+     border: 2px solid lblue;
+     background: bgcolor;
+     width: 20px;
+     subcontrol-position: right;
+     subcontrol-origin: margin;
+ }
+
+QScrollBar::sub-line:horizontal {
+    border: 2px solid lblue;
+    background: bgcolor;
+    width: 20px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QHeaderView::section {
+    background: lblue;
+    color: white;
+    border: 1px solid lblue;
+    font-size: 16px;
+}
+
+QTableWidget{
+    font-size: 15px;
+    color: lblue;
+    gridline-color: lblue;
+}
+
+QTableWidget QTableCornerButton::section {
+    background-color: lblue;
+    border: 1px solid lblue;
+}

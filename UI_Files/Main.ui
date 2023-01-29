@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Employee Management System</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../Icons/Logo.png</normaloff>../Icons/Logo.png</iconset>
+  </property>
   <property name="documentMode">
    <bool>false</bool>
   </property>
@@ -30,12 +34,20 @@
           <property name="text">
            <string>Open existing Employee DB</string>
           </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Icons/open.png</normaloff>../Icons/open.png</iconset>
+          </property>
          </widget>
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="newdb_btn">
           <property name="text">
            <string>New Employee DB</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Icons/new.png</normaloff>../Icons/new.png</iconset>
           </property>
          </widget>
         </item>
@@ -243,7 +255,11 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="l_limit"/>
+            <widget class="QSpinBox" name="l_limit">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+            </widget>
            </item>
            <item row="3" column="1">
             <widget class="QComboBox" name="des_data">
@@ -265,7 +281,11 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="u_limit"/>
+            <widget class="QSpinBox" name="u_limit">
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+            </widget>
            </item>
            <item row="4" column="0" colspan="2">
             <widget class="QPushButton" name="open_btn">
@@ -310,7 +330,7 @@
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="alternatingRowColors">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="columnCount">
            <number>9</number>
@@ -546,7 +566,11 @@
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QSpinBox" name="emp_salary_value_ad"/>
+         <widget class="QSpinBox" name="emp_salary_value_ad">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+         </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_3">
@@ -592,16 +616,28 @@
          </widget>
         </item>
         <item row="4" column="5">
-         <widget class="QSpinBox" name="emp_age_value_ad"/>
+         <widget class="QSpinBox" name="emp_age_value_ad">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+         </widget>
         </item>
         <item row="3" column="5">
-         <widget class="QDateEdit" name="emp_doj_value_ad"/>
+         <widget class="QDateEdit" name="emp_doj_value_ad">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+         </widget>
         </item>
         <item row="2" column="3" colspan="3">
          <widget class="QLineEdit" name="emp_desig_value_ad"/>
         </item>
         <item row="5" column="5">
-         <widget class="QSpinBox" name="emp_exp_value_ad"/>
+         <widget class="QSpinBox" name="emp_exp_value_ad">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+         </widget>
         </item>
         <item row="1" column="3" colspan="3">
          <widget class="QLineEdit" name="emp_name_value_ad"/>
