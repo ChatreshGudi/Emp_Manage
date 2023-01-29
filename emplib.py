@@ -21,9 +21,9 @@ class EmployeeManagement:
             self.__file_read.seek(0)
             self.__employee_data = json.loads(self.__file_read.read().strip())
         else:
-            self.__employee_data = {}
+            self.__employee_data = {"Login details":{"Admin":{}, "Employee":{}}}
         # print(self.__employee_data)
-
+    
     def add_employee(self, name:str, gender:str, salary:int, designation:str, date_of_joining:datetime, age:int, exp:int, dept:str):
         employee_id = self.__generate_employee_id()
         self.__employee_data[employee_id] = {
@@ -36,11 +36,17 @@ class EmployeeManagement:
             "experience":exp,
             "dept":dept
         }
+        self.__employee_data["Login details"]["Employee"][name] = employee_id+gender
         self.update_file()
         return employee_id
 
     def remove_employee(self, employee_id):
         if employee_id in self.__employee_data:
+            del_emp_name = ""
+            for k in self.__employee_data["Login details"]["Employee"]:
+                if self.__employee_data["Login details"]["Employee"][k][:-1] == employee_id:
+                    del_emp_name = k
+            del self.__employee_data["Login details"]["Employee"][del_emp_name]
             del self.__employee_data[employee_id]
             num = int(employee_id[1:])
             # print("before del: ", len(self.__employee_data)-1)
@@ -135,11 +141,6 @@ class EmployeeManagement:
         '''Writes data to the file.'''
         with open(self.filepath, 'w') as fwrite:
             fwrite.write(json.dumps(self.__employee_data))
-    
-    def verify_login(self, type:str, name:str, passw:str):
-        if name in self.__employee_data["Login details"][type] and self.__employee_data["Login details"][type][name] == passw:
-            return True
-        return False
 
     def gen_designations(self):
         designations = set()
@@ -160,9 +161,23 @@ class EmployeeManagement:
         for i in self.__employee_data:
             if i!= "Login details":
                 sal_list.append(self.__employee_data[i]["salary"])
+        if len(sal_list) == 0:
+            return [0]
         return sal_list
+    
+    def verify_login(self, type:str, name:str, passw:str):
+        if name in self.__employee_data["Login details"][type] and self.__employee_data["Login details"][type][name] == passw:
+            return True
+        return False
+    
+    def register_admin(self, uname:str, upass:str):
+        self.__employee_data["Login details"]["Admin"][uname] = upass
+        self.update_file()
+
+# Testing
 
 # emp_man = EmployeeManagement("emp.json")
+# emp_man.register_admin("admin", "password")
 # emp_man.verify_login("Admin", "ad", "pass")
 # emp_man.add_employee("Chatresh", "M", 100000, "Developer", "12-12-2023", 16, 2, "Research")
 # emp_man.add_employee("Avinash", "M", 1000000, "CEO", "12-12-2023", 18, 2, "Management")

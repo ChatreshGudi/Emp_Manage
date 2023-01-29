@@ -43,46 +43,6 @@
       </widget>
       <widget class="QWidget" name="Login_Page">
        <layout class="QGridLayout" name="gridLayout">
-        <item row="3" column="3" colspan="3">
-         <widget class="QLineEdit" name="name_text">
-          <property name="echoMode">
-           <enum>QLineEdit::Normal</enum>
-          </property>
-          <property name="placeholderText">
-           <string>Enter your Name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4" colspan="2">
-         <widget class="QRadioButton" name="Emp">
-          <property name="text">
-           <string>Employee</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="4" colspan="2">
-         <widget class="QPushButton" name="login_btn">
-          <property name="toolTip">
-           <string>Login</string>
-          </property>
-          <property name="text">
-           <string>Login</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="6">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="3" column="1">
          <spacer name="horizontalSpacer">
           <property name="orientation">
@@ -96,37 +56,33 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="3">
-         <widget class="QRadioButton" name="Admin">
-          <property name="text">
-           <string>Admin</string>
+        <item row="3" column="7">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="checked">
-           <bool>true</bool>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="2">
+         <widget class="QLabel" name="pass_lbl">
+          <property name="text">
+           <string>Password: </string>
           </property>
          </widget>
         </item>
         <item row="5" column="3" colspan="2">
          <widget class="QLineEdit" name="pass_text">
           <property name="echoMode">
-           <enum>QLineEdit::PasswordEchoOnEdit</enum>
+           <enum>QLineEdit::Password</enum>
           </property>
           <property name="placeholderText">
            <string>Enter Password</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLabel" name="name_lbl">
-          <property name="text">
-           <string>Name: </string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QLabel" name="pass_lbl">
-          <property name="text">
-           <string>Password: </string>
           </property>
          </widget>
         </item>
@@ -137,13 +93,10 @@
           </property>
          </widget>
         </item>
-        <item row="7" column="2">
-         <widget class="QPushButton" name="register_btn">
-          <property name="toolTip">
-           <string>Register</string>
-          </property>
+        <item row="3" column="2">
+         <widget class="QLabel" name="name_lbl">
           <property name="text">
-           <string>Register</string>
+           <string>Name: </string>
           </property>
          </widget>
         </item>
@@ -161,7 +114,7 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="1" colspan="6">
+        <item row="6" column="1" colspan="7">
          <widget class="QLabel" name="error_msg">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -171,6 +124,64 @@
           </property>
           <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="6">
+         <widget class="QPushButton" name="pass_view_btn">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../Icons/View_Pass.png</normaloff>../Icons/View_Pass.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3" colspan="4">
+         <widget class="QLineEdit" name="name_text">
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Enter your Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3" colspan="2">
+         <widget class="QRadioButton" name="Admin">
+          <property name="text">
+           <string>Admin</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5" colspan="2">
+         <widget class="QRadioButton" name="Emp">
+          <property name="text">
+           <string>Employee</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2" colspan="2">
+         <widget class="QPushButton" name="register_btn">
+          <property name="toolTip">
+           <string>Register</string>
+          </property>
+          <property name="text">
+           <string>Register</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="4" colspan="3">
+         <widget class="QPushButton" name="login_btn">
+          <property name="toolTip">
+           <string>Login</string>
+          </property>
+          <property name="text">
+           <string>Login</string>
           </property>
          </widget>
         </item>
@@ -295,6 +306,12 @@
         </item>
         <item row="1" column="1" colspan="3">
          <widget class="QTableWidget" name="Emp_View">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
           <property name="columnCount">
            <number>9</number>
           </property>
@@ -347,7 +364,122 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Employee_EMP_Page"/>
+      <widget class="QWidget" name="Employee_EMP_Page">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Designation: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Name: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Salary: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Gender:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Age: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Date of joining: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="emp_salary_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="emp_age_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="3">
+         <widget class="QLabel" name="emp_desig_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="emp_gender_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="emp_doj_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" colspan="3">
+         <widget class="QLabel" name="emp_name_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>Department:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="emp_dept_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QLabel" name="lbl">
+          <property name="text">
+           <string>Experience: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QLabel" name="emp_exp_value_emp">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="Admin_EMP_Page">
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="4" column="3">
@@ -444,6 +576,12 @@
            <iconset>
             <normaloff>../Icons/update.png</normaloff>../Icons/update.png</iconset>
           </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
          </widget>
         </item>
         <item row="5" column="4">
@@ -488,6 +626,12 @@
           <property name="icon">
            <iconset>
             <normaloff>../Icons/Back.png</normaloff>../Icons/Back.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
           </property>
          </widget>
         </item>

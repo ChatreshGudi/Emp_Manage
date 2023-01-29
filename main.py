@@ -3,6 +3,7 @@ from PyQt6.uic import loadUi
 from PyQt6 import *
 from PyQt6.QtWidgets import QStackedWidget, QApplication, QMainWindow, QWidget, QFileDialog, QLineEdit, QTableWidgetItem
 from PyQt6.QtCore import QDate
+from PyQt6.QtGui import QIcon
 import sys
 import os
 from emplib import *
@@ -13,7 +14,8 @@ class Window(QMainWindow):
         loadUi("UI_Files/Main.ui", self)
 
         self.is_new_emp = False
-        
+        self.passw_view = False
+
         # Widgets
 
         ## Home Page
@@ -21,8 +23,10 @@ class Window(QMainWindow):
         self.newdb_btn.clicked.connect(self.newDB) # Creating a new Employee DB file.
         
         ## Login Page
-        self.rand_pass_btn.clicked.connect(self.rand_pass) # Generating a random password.
         self.login_btn.clicked.connect(self.login) # Login
+        self.register_btn.clicked.connect(self.register) # Register
+        self.rand_pass_btn.clicked.connect(self.rand_pass) # Generating a random password.
+        self.pass_view_btn.clicked.connect(self.view_pass) # Hide or show password
 
         ## Admin Main Page
         self.open_btn.clicked.connect(self.openempdata) # Used to Open Employee data.
@@ -38,19 +42,30 @@ class Window(QMainWindow):
 
     def openDB(self):
         filepath = QFileDialog.getOpenFileName(self, "Open Employee Database", "c:\\", "EMP DB Files (*.json);;") # Opening a file.
-        self.emp_man = EmployeeManagement(filepath[0]) # Creating an employee managment system object.
-        self.stackedWidget.setCurrentWidget(self.Login_Page) # Opening the login Page.
+        if filepath[0] != "":
+            self.emp_man = EmployeeManagement(filepath[0]) # Creating an employee managment system object.
+            self.stackedWidget.setCurrentWidget(self.Login_Page) # Opening the login Page.
 
     def newDB(self):
         filepath = QFileDialog.getSaveFileName(self, "Open Employee Database", "c:\\", "EMP DB Files (*.json);;")
-        self.emp_man = EmployeeManagement(filepath[0]) # Creating an employee managment system object.
-        self.stackedWidget.setCurrentWidget(self.Login_Page) # Opening the login Page.
+        if filepath[0] != "":
+            self.emp_man = EmployeeManagement(filepath[0]) # Creating an employee managment system object.
+            self.stackedWidget.setCurrentWidget(self.Login_Page) # Opening the login Page.
 
     # Login Page
 
     def rand_pass(self):
         self.pass_text.setText(random_pas_gen())
     
+    def view_pass(self):
+        if self.passw_view:
+            self.pass_text.setEchoMode(QLineEdit.EchoMode.Password)
+            self.pass_view_btn.setIcon(QIcon("Icons/View_Pass.png"))
+        else:
+            self.pass_text.setEchoMode(QLineEdit.EchoMode.Normal)
+            self.pass_view_btn.setIcon(QIcon("Icons/Hide_Pass.png"))
+        self.passw_view = not self.passw_view
+
     def login(self):
         name = self.name_text.text()
         passw = self.pass_text.text()
@@ -66,8 +81,21 @@ class Window(QMainWindow):
                     self.stackedWidget.setCurrentWidget(self.Admin_Main_Page)
                     self.setup_Admin_Main_Page()
                 elif type == "Employee":
-                    pass
+                    self.stackedWidget.setCurrentWidget(self.Employee_EMP_Page)
+                    self.setup_EMP_Main_Page(passw[:-1])
+            else:
+                self.error_msg.setText("Your login credentials are wrong please check again.")
     
+    def register(self):
+        name = self.name_text.text()
+        passw = self.pass_text.text()
+        if self.Emp.isChecked():
+            self.error_msg.setText("An employee can't register on his/her own please ask your admin to add you to the employee base.")
+        else:
+            self.emp_man.register_admin(name, passw)
+            self.stackedWidget.setCurrentWidget(self.Admin_Main_Page)
+            self.setup_Admin_Main_Page()
+
     def setup_Admin_Main_Page(self):
         # Setting up the Designation Combo Box.
         desigs = [self.des_data.itemText(i) for i in range(self.des_data.count())]
@@ -100,35 +128,47 @@ class Window(QMainWindow):
                 col+=1
             row+=1
 
+    def setup_EMP_Main_Page(self, id:str):
+        self.emp_name_value_emp.setText(self.emp_man.get_all_employees()[id]["name"])
+        self.emp_desig_value_emp.setText(self.emp_man.get_all_employees()[id]["designation"])
+        self.emp_salary_value_emp.setText(str(self.emp_man.get_all_employees()[id]["salary"]))
+        self.emp_doj_value_emp.setText(self.emp_man.get_all_employees()[id]["date_of_joining"])
+        self.emp_gender_value_emp.setText(self.emp_man.get_all_employees()[id]["gender"])
+        self.emp_age_value_emp.setText(str(self.emp_man.get_all_employees()[id]["age"]))
+        self.emp_dept_value_emp.setText(self.emp_man.get_all_employees()[id]["dept"])
+        self.emp_exp_value_emp.setText(str(self.emp_man.get_all_employees()[id]["experience"]))
+
     # Admin Main Page
     def openempdata(self):
         
-        self.stackedWidget.setCurrentWidget(self.Admin_EMP_Page) # Changing the page.
         
         # Setting up the necessary variables
-        self.__cur_emp_ID = self.Emp_View.item(self.Emp_View.currentRow(), 0).text()
-        emp_data = self.emp_man.get_all_employees()[self.__cur_emp_ID]
+        if self.Emp_View.currentRow() != -1:
+            self.stackedWidget.setCurrentWidget(self.Admin_EMP_Page) # Changing the page.
+            self.__cur_emp_ID = self.Emp_View.item(self.Emp_View.currentRow(), 0).text()
+            emp_data = self.emp_man.get_all_employees()[self.__cur_emp_ID]
 
-        self.emp_salary_value_ad.setMaximum(2147483647) # Changing the maximum value
-        depts = [self.emp_dept_value_ad.itemText(i) for i in range(self.emp_dept_value_ad.count())]
-        for i in self.emp_man.gen_departments():
-            if i != "Login details" and i not in depts:
-                self.emp_dept_value_ad.addItem(i)
+            self.emp_salary_value_ad.setMaximum(2147483647) # Changing the maximum value
+            depts = [self.emp_dept_value_ad.itemText(i) for i in range(self.emp_dept_value_ad.count())]
+            for i in self.emp_man.gen_departments():
+                if i != "Login details" and i not in depts:
+                    self.emp_dept_value_ad.addItem(i)
 
-        # Setting up the values in the widgets
-        self.emp_name_value_ad.setText(emp_data["name"])
-        self.emp_desig_value_ad.setText(emp_data["designation"])
-        self.emp_salary_value_ad.setValue(emp_data["salary"])
-        self.emp_gender_value_ad.setCurrentText(emp_data["gender"])
-        self.emp_age_value_ad.setValue(emp_data["age"])
-        self.emp_dept_value_ad.setCurrentText(emp_data["dept"])
-        self.emp_exp_value_ad.setValue(emp_data["experience"])
-        date = [int(i) for i in emp_data["date_of_joining"].split('-')]
-        self.emp_doj_value_ad.setDate(QDate(date[-1], date[1], date[0]))
+            # Setting up the values in the widgets
+            self.emp_name_value_ad.setText(emp_data["name"])
+            self.emp_desig_value_ad.setText(emp_data["designation"])
+            self.emp_salary_value_ad.setValue(emp_data["salary"])
+            self.emp_gender_value_ad.setCurrentText(emp_data["gender"])
+            self.emp_age_value_ad.setValue(emp_data["age"])
+            self.emp_dept_value_ad.setCurrentText(emp_data["dept"])
+            self.emp_exp_value_ad.setValue(emp_data["experience"])
+            date = [int(i) for i in emp_data["date_of_joining"].split('-')]
+            self.emp_doj_value_ad.setDate(QDate(date[-1], date[1], date[0]))
     
     def delete_emp(self):
-        self.emp_man.remove_employee(self.Emp_View.item(self.Emp_View.currentRow(), 0).text()) # Deleting the employee
-        self.setup_Admin_Main_Page() # Refreshing the data
+        if self.Emp_View.currentRow() != -1:
+            self.emp_man.remove_employee(self.Emp_View.item(self.Emp_View.currentRow(), 0).text()) # Deleting the employee
+            self.setup_Admin_Main_Page() # Refreshing the data
 
     def new_emp(self):
         self.stackedWidget.setCurrentWidget(self.Admin_EMP_Page)
@@ -156,7 +196,6 @@ class Window(QMainWindow):
         if desig_data == 'All':
             desig_data = None
         search_data = self.emp_man.search(name = self.search_txt.text(), salaryl = (self.l_limit.value(), self.u_limit.value()), designation= desig_data)
-        # print("search data: ", search_data)
         self.Setup_Emp_View(search_data)
 
     # Admin Employee View Page
