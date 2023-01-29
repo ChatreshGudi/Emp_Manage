@@ -22,7 +22,6 @@ class EmployeeManagement:
             self.__employee_data = json.loads(self.__file_read.read().strip())
         else:
             self.__employee_data = {"Login details":{"Admin":{}, "Employee":{}}}
-        # print(self.__employee_data)
     
     def add_employee(self, name:str, gender:str, salary:int, designation:str, date_of_joining:datetime, age:int, exp:int, dept:str):
         employee_id = self.__generate_employee_id()
@@ -49,10 +48,8 @@ class EmployeeManagement:
             del self.__employee_data["Login details"]["Employee"][del_emp_name]
             del self.__employee_data[employee_id]
             num = int(employee_id[1:])
-            # print("before del: ", len(self.__employee_data)-1)
             for i in range(num, len(self.__employee_data)-1):
                 self.__employee_data["E"+str(i)] = self.__employee_data["E"+str(i+1)]
-            # print("after del: ", len(self.__employee_data)-2)
             if len(self.__employee_data)-1 != int(employee_id[1:]):
                 del self.__employee_data["E"+str(len(self.__employee_data)-2)]
             self.update_file()
@@ -128,7 +125,6 @@ class EmployeeManagement:
             
     def get_all_employees(self):
         '''Returns the employee data.'''
-        # print(self.__employee_data)
         data = self.__employee_data.copy()
         del data["Login details"]
         return data
