@@ -110,8 +110,9 @@ class Window(QMainWindow):
         emp_data = self.emp_man.get_all_employees()[self.__cur_emp_ID]
 
         self.emp_salary_value_ad.setMaximum(2147483647) # Changing the maximum value
-        for i in self.emp_man.gen_designations():
-            if i != "Login details":
+        depts = [self.emp_dept_value_ad.itemText(i) for i in range(self.emp_dept_value_ad.count())]
+        for i in self.emp_man.gen_departments():
+            if i != "Login details" and i not in depts:
                 self.emp_dept_value_ad.addItem(i)
 
         # Setting up the values in the widgets
@@ -126,29 +127,45 @@ class Window(QMainWindow):
         self.emp_doj_value_ad.setDate(QDate(date[-1], date[1], date[0]))
     
     def delete_emp(self):
-        self.emp_man.remove_employee("E"+str(self.Emp_View.currentRow()))
-        self.setup_Admin_Main_Page()
+        self.emp_man.remove_employee(self.Emp_View.item(self.Emp_View.currentRow(), 0).text()) # Deleting the employee
+        self.setup_Admin_Main_Page() # Refreshing the data
 
     def new_emp(self):
         self.stackedWidget.setCurrentWidget(self.Admin_EMP_Page)
         self.is_new_emp = True
-        pass
+
+        # Widget Configurations
+        self.emp_salary_value_ad.setMaximum(2147483647)
+        depts = [self.emp_dept_value_ad.itemText(i) for i in range(self.emp_dept_value_ad.count())]
+        for i in self.emp_man.gen_departments():
+            if i != "Login details" and i not in depts:
+                self.emp_dept_value_ad.addItem(i)
+
+        # Setting the values to null of the widgets.
+        self.emp_name_value_ad.setText('')
+        self.emp_desig_value_ad.setText('')
+        self.emp_salary_value_ad.setValue(0)
+        self.emp_gender_value_ad.setCurrentText('')
+        self.emp_age_value_ad.setValue(0)
+        self.emp_dept_value_ad.setCurrentText('')
+        self.emp_exp_value_ad.setValue(0)
+        self.emp_doj_value_ad.setDate(QDate.currentDate())
 
     def search_emps(self):
         desig_data = self.des_data.currentText()
         if desig_data == 'All':
             desig_data = None
         search_data = self.emp_man.search(name = self.search_txt.text(), salaryl = (self.l_limit.value(), self.u_limit.value()), designation= desig_data)
-        print("search data: ", search_data)
+        # print("search data: ", search_data)
         self.Setup_Emp_View(search_data)
 
     # Admin Employee View Page
     def update_emp_details(self):
         if not self.is_new_emp:
-            self.emp_man.update_employee(self.__cur_emp_ID, self.emp_name_value_ad.text(), self.emp_gender_value_ad.currentText(), self.emp_salary_value_ad.value(), self.emp_desig_value_ad.text(), self.emp_doj_value_ad.date().toString('dd-MM-yyyy'))
+            self.emp_man.update_employee(self.__cur_emp_ID, self.emp_name_value_ad.text(), self.emp_gender_value_ad.currentText(), self.emp_salary_value_ad.value(), self.emp_desig_value_ad.text(), self.emp_doj_value_ad.date().toString('dd-MM-yyyy'), self.emp_age_value_ad.value(), self.emp_dept_value_ad.currentText(), self.emp_exp_value_ad.value())
         else:
-            self.is_new_emp = False
-            pass
+            self.emp_man.add_employee(self.emp_name_value_ad.text(), self.emp_gender_value_ad.currentText(), self.emp_salary_value_ad.value(), self.emp_desig_value_ad.text(), self.emp_doj_value_ad.date().toString('dd-MM-yyyy'), self.emp_age_value_ad.value(), self.emp_exp_value_ad.value(), self.emp_dept_value_ad.currentText(), )
+            self.is_new_emp = False        
 
     def loadAdmin_Page_Again(self):
         self.stackedWidget.setCurrentWidget(self.Admin_Main_Page)

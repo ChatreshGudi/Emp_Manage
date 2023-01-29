@@ -320,12 +320,12 @@
           </column>
           <column>
            <property name="text">
-            <string>Date of Joining</string>
+            <string>Designation</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Designation</string>
+            <string>Date of Joining</string>
            </property>
           </column>
           <column>

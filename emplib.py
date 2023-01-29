@@ -22,7 +22,7 @@ class EmployeeManagement:
             self.__employee_data = json.loads(self.__file_read.read().strip())
         else:
             self.__employee_data = {}
-        print(self.__employee_data)
+        # print(self.__employee_data)
 
     def add_employee(self, name:str, gender:str, salary:int, designation:str, date_of_joining:datetime, age:int, exp:int, dept:str):
         employee_id = self.__generate_employee_id()
@@ -43,15 +43,18 @@ class EmployeeManagement:
         if employee_id in self.__employee_data:
             del self.__employee_data[employee_id]
             num = int(employee_id[1:])
+            # print("before del: ", len(self.__employee_data)-1)
             for i in range(num, len(self.__employee_data)-1):
                 self.__employee_data["E"+str(i)] = self.__employee_data["E"+str(i+1)]
-            del self.__employee_data["E"+str(i+1)]
+            # print("after del: ", len(self.__employee_data)-2)
+            if len(self.__employee_data)-1 != int(employee_id[1:]):
+                del self.__employee_data["E"+str(len(self.__employee_data)-2)]
             self.update_file()
             return True
         else:
             return False
 
-    def update_employee(self, employee_id, name=None, gender=None, salary=None, designation=None, date_of_joining=None):
+    def update_employee(self, employee_id, name=None, gender=None, salary=None, designation=None, date_of_joining=None, age = None, dept = None, exp = None):
         if employee_id in self.__employee_data:
             if name:
                 self.__employee_data[employee_id]["name"] = name
@@ -63,6 +66,12 @@ class EmployeeManagement:
                 self.__employee_data[employee_id]["designation"] = designation
             if date_of_joining:
                 self.__employee_data[employee_id]["date_of_joining"] = date_of_joining
+            if age:
+                self.__employee_data[employee_id]["age"] = age
+            if dept:
+                self.__employee_data[employee_id]["dept"] = dept
+            if exp:
+                self.__employee_data[employee_id]["experience"] = exp
             self.update_file()
             return True
         else:
@@ -120,7 +129,7 @@ class EmployeeManagement:
 
     def __generate_employee_id(self):
         '''Generate a unique employee id'''
-        return "E" + str(len(self.__employee_data))
+        return "E" + str(len(self.__employee_data)-1)
     
     def update_file(self):
         '''Writes data to the file.'''
@@ -139,6 +148,13 @@ class EmployeeManagement:
                 designations.add(self.__employee_data[i]["designation"])
         return designations
 
+    def gen_departments(self):
+        departments = set()
+        for i in self.__employee_data:
+            if i != "Login details":
+                departments.add(self.__employee_data[i]["dept"])
+        return departments
+
     def find_sal_list(self):
         sal_list = []
         for i in self.__employee_data:
@@ -150,7 +166,7 @@ class EmployeeManagement:
 # emp_man.verify_login("Admin", "ad", "pass")
 # emp_man.add_employee("Chatresh", "M", 100000, "Developer", "12-12-2023", 16, 2, "Research")
 # emp_man.add_employee("Avinash", "M", 1000000, "CEO", "12-12-2023", 18, 2, "Management")
-# emp_man.remove_employee("E2")
+# emp_man.remove_employee("E3")
 # emp_man.update_employee("E1", salary = 1000000000000)
 # print(emp_man.search(salaryl=(100000, 9999990)))
 # print(emp_man.get_all_employees())
