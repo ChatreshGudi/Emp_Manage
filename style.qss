@@ -48,18 +48,40 @@ QComboBox{
 }
 
 QComboBox::drop-down{
-    background:theme;
-    color: white;
+    border: 0px;
 }
 
-QComboBox QAbstractItemView{
-	background-color: theme;
-	color: lblue;
- 
-	selection-background-color: lblue;
-	selection-color: theme;
+QComboBox::down-arrow{
+    image: url(./Icons/down.png);
+    width: 25px;
+    height: 25px;
+}
 
+QComboBox QListView{
     font-size: 15px;
+    border: 1px solid lblue;
+    padding: 10px;
+    background: bgcolor;
+    outline: 0px;
+    border-radius: 15px;
+    color: theme;
+}
+
+QComboBox QListView::item{
+    padding: 5px;
+    font-size: 15px;
+}
+
+QComboBox QListView::item:hover{
+    background:theme;
+    color: lblue;
+    border-radius: 5px;
+}
+
+QComboBox QListView::item:selected{
+    background:theme;
+    color: lblue;
+    border-radius: 5px;
 }
 
 QRadioButton{

@@ -49,6 +49,7 @@ class EmployeeManagement:
             del self.__employee_data[employee_id]
             num = int(employee_id[1:])
             for i in range(num, len(self.__employee_data)-1):
+                self.__employee_data["Login details"]["Employee"][self.__employee_data["E"+str(i+1)]["name"]] = "E"+str(i)+self.__employee_data["E"+str(i+1)]["gender"]
                 self.__employee_data["E"+str(i)] = self.__employee_data["E"+str(i+1)]
             if len(self.__employee_data)-1 != int(employee_id[1:]):
                 del self.__employee_data["E"+str(len(self.__employee_data)-2)]
@@ -60,7 +61,10 @@ class EmployeeManagement:
     def update_employee(self, employee_id, name=None, gender=None, salary=None, designation=None, date_of_joining=None, age = None, dept = None, exp = None):
         if employee_id in self.__employee_data:
             if name:
+                up_passw = self.__employee_data["Login details"]["Employee"][self.__employee_data[employee_id]["name"]]
+                del self.__employee_data["Login details"]["Employee"][self.__employee_data[employee_id]["name"]]
                 self.__employee_data[employee_id]["name"] = name
+                self.__employee_data["Login details"]["Employee"][name] = up_passw
             if gender:
                 self.__employee_data[employee_id]["gender"] = gender
             if salary:
