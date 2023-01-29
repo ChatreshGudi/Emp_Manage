@@ -126,7 +126,7 @@ QScrollBar::sub-line:horizontal {
 
 QHeaderView::section {
     background: lblue;
-    color: white;
+    color: theme;
     border: 1px solid lblue;
     font-size: 16px;
 }
