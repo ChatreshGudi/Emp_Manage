@@ -93,6 +93,7 @@ class EmployeeManagement:
                 if i != "Login details":
                     if name in self.__employee_data[i]["name"]:
                         ids.add(i)
+                        continue
         
         if salaryl: # Searching Based on Salary
             if len(ids) == 0:
